@@ -1,0 +1,10 @@
+projeto-prescricoes/
+│
+├── public/
+│   ├── index.html           # Interface principal
+│   ├── styles.css           # Estilos do site
+│   ├── script.js            # Código JavaScript
+│
+├── server.js                # Servidor Node.js com Express
+├── database.sqlite          # Banco de dados SQLite
+└── package.json             # Configurações do Node.js
