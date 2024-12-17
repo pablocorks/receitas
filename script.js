@@ -1,74 +1,82 @@
-// Configuração do Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyAvu6oaQDTEnf9do7PsgiiklYJig2gWIVc",
-    authDomain: "receitas-be3d8.firebaseapp.com",
-    databaseURL: "https://receitas-be3d8-default-rtdb.firebaseio.com",
-    projectId: "receitas-be3d8",
-    storageBucket: "receitas-be3d8.firebasestorage.app",
-    messagingSenderId: "852039547622",
-    appId: "1:852039547622:web:0c7fcf562ad90a589c1927"
+const medications = {
+  "Oxalato de Escitalopram": {
+    usage: ["USO ORAL"],
+    doses: ["10mg", "15mg", "20mg"],
+    brands: ["Reconter®", "Fusor®", "Esc®", "Eudok®"],
+    instructions: [
+      "Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.",
+      "Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.",
+      "Tomar 1 comprimido por dia Antes de dormir, no mesmo horário."
+    ]
+  },
+  "Cloridrato de Sertralina": {
+    usage: ["USO ORAL"],
+    doses: ["25mg", "50mg", "100mg"],
+    brands: ["Zoloft®", "Assert®", "Serenata®", "Tolrest®", "Afetus®"],
+    instructions: [
+      "Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.",
+      "Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.",
+      "Tomar 1 comprimido por dia Antes de dormir, no mesmo horário."
+    ]
+  },
+  "Cloridrato de Bupropiona XL": {
+    usage: ["USO ORAL"],
+    doses: ["150mg", "300mg"],
+    brands: ["Alpes XL®", "Bup XL®", "Bupium XL®", "Seth®", "Zetron XL®"],
+    instructions: [
+      "Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário."
+    ]
+  }
 };
 
-// Inicializa Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+let prescriptionList = [];
 
-// Abrir o formulário de inserção
-function abrirFormulario() {
-    document.getElementById("popup").style.display = "block";
+function openPrescModal(medication) {
+  const medData = medications[medication];
+  const usageForm = medData.usage[0]; // Assuming one form per medication for simplicity
+  const dose = medData.doses.join(", ");
+  const brands = medData.brands.join(", ");
+  const instructions = medData.instructions.join("\n\n");
+
+  let prescriptionText = `
+    ${usageForm}
+    ${prescriptionList.length + 1} - ${medication} ${dose} ________ 30 cp
+    (${brands})
+    - ${instructions}
+  `;
+  prescriptionList.push(prescriptionText);
+  updatePrescriptionOutput();
 }
 
-// Fechar o formulário de inserção
-function fecharFormulario() {
-    document.getElementById("popup").style.display = "none";
+function updatePrescriptionOutput() {
+  const prescriptionText = prescriptionList.join("\n\n");
+  document.getElementById('prescription-text').value = prescriptionText;
 }
 
-// Salvar medicamento no Firebase
-function salvarMedicamento() {
-    const nome = document.getElementById("nome").value;
-    const dose = document.getElementById("dose").value;
-    const quantidade = document.getElementById("quantidade").value;
-    const instrucoes = document.getElementById("instrucoes").value;
-
-    // Adiciona ao banco de dados
-    db.ref("medicamentos").push({
-        nome,
-        dose,
-        quantidade,
-        instrucoes
-    }).then(() => {
-        alert("Medicamento adicionado com sucesso!");
-        fecharFormulario();
-        carregarMedicamentos();
-    }).catch((error) => {
-        console.error("Erro ao salvar medicamento:", error);
-    });
+function copyToClipboard() {
+  const text = document.getElementById('prescription-text');
+  text.select();
+  document.execCommand('copy');
 }
 
-// Carregar medicamentos do Firebase
-function carregarMedicamentos() {
-    const listaMedicamentos = document.getElementById("medicamentos");
-    listaMedicamentos.innerHTML = "";
-
-    db.ref("medicamentos").once("value", (snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-            const medicamento = childSnapshot.val();
-            const li = document.createElement("li");
-            li.textContent = `${medicamento.nome} - ${medicamento.dose} - ${medicamento.quantidade} - ${medicamento.instrucoes}`;
-            listaMedicamentos.appendChild(li);
-        });
-    });
+function openAddMedicationModal() {
+  document.getElementById('add-medication-modal').style.display = 'block';
 }
 
-// Copiar Receita
-function copiarReceita() {
-    const receita = document.getElementById("receita").innerText;
-    navigator.clipboard.writeText(receita).then(() => {
-        alert("Receita copiada para a área de transferência!");
-    }).catch((err) => {
-        console.error("Erro ao copiar receita: ", err);
-    });
+function saveMedication() {
+  const form = document.getElementById('add-medication-form');
+  const medicationData = {
+    usage: [form.querySelector('#add-usage-form').value],
+    doses: [form.querySelector('#add-dose').value],
+    brands: [form.querySelector('#add-brand').value],
+    instructions: [form.querySelector('#add-instructions').value],
+  };
+
+  medications[form.querySelector('#add-medication-name').value] = medicationData;
+  document.getElementById('add-medication-modal').style.display = 'none';
+  alert('Medicação salva com sucesso!');
 }
 
-// Carregar os medicamentos ao iniciar o site
-carregarMedicamentos();
+function editMedication(medication) {
+  alert('Funcionalidade de edição ainda não implementada.');
+}
