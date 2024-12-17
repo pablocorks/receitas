@@ -1,42 +1,47 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prescrições Médicas - Dr. Pablo</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescrições Dr. Pablo Xavier</title>
 </head>
 <body>
-  <h1>Site de Prescrições - Dr. Pablo Xavier</h1>
-
-  <button onclick="abrirPopup()">INSERIR NOVA MEDICAÇÃO</button>
-  <div id="lista-medicamentos"></div>
-
-  <!-- Popup -->
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <h2>Inserir Medicação</h2>
-      <label>Nome do Remédio:
-        <select id="nome-remedio">
-          <option value="Oxalato de Escitalopram">Oxalato de Escitalopram</option>
-          <option value="Cloridrato de Sertralina">Cloridrato de Sertralina</option>
-          <option value="Cloridrato de Bupropiona XL">Cloridrato de Bupropiona XL</option>
-        </select>
-      </label><br>
-      <label>Quantidade (cp):
-        <input type="number" id="quantidade-remedio" min="1" value="30">
-      </label><br>
-      <button onclick="salvarMedicacao()">Salvar</button>
-      <button onclick="fecharPopup()">Cancelar</button>
+    <h1>SITE DE PRESCRIÇÕES DR. PABLO XAVIER</h1>
+    
+    <!-- Botão para Inserir Nova Medicação -->
+    <button onclick="abrirFormulario()">INSERIR NOVA MEDICAÇÃO</button>
+    
+    <!-- Lista de Medicamentos -->
+    <div id="listaMedicamentos">
+        <h3>Medicamentos Disponíveis</h3>
+        <ul id="medicamentos"></ul>
     </div>
-  </div>
+    
+    <!-- Janela de Prescrição -->
+    <h2>Receita Gerada:</h2>
+    <div id="receita"></div>
+    <button onclick="copiarReceita()">COPIAR RECEITA</button>
+    
+    <!-- Popup para Inserir Dados -->
+    <div id="popup" style="display:none; border:1px solid #000; padding:20px; position:fixed; top:20%; left:30%; background-color:#fff;">
+        <h3>Adicionar Medicamento</h3>
+        <label for="nome">Nome do Remédio:</label>
+        <input type="text" id="nome"><br><br>
+        <label for="dose">Dose:</label>
+        <input type="text" id="dose"><br><br>
+        <label for="quantidade">Quantidade:</label>
+        <input type="text" id="quantidade"><br><br>
+        <label for="instrucoes">Instruções:</label>
+        <input type="text" id="instrucoes"><br><br>
+        <button onclick="salvarMedicamento()">Salvar</button>
+        <button onclick="fecharFormulario()">Fechar</button>
+    </div>
 
-  <h2>Prescrição Final</h2>
-  <pre id="prescricao"></pre>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
 
-  <script src="script.js"></script>
+    <!-- Script JS -->
+    <script src="script.js"></script>
 </body>
 </html>
