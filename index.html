@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 100%;
             margin: 0 auto;
             padding: 20px;
             background-color: #f4f4f4;
@@ -18,9 +18,9 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .medication-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
+            display: inline-block;
+            width: auto;
+            padding: 5px 10px; /* Ajuste opcional do preenchimento */
             margin: 10px 0;
             background-color: #e49228;
             color: white;
@@ -57,12 +57,14 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
+
         }
         .action-buttons button {
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+
         }
         #copy-btn {
             background-color: #28a745;
@@ -76,7 +78,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Prescrições Dr. Pablo Xavier</h1>
+        <h3>Prescrições Dr. Pablo Xavier</h3>
         
         <button class="medication-btn" onclick="openModal('Oxalato de Escitalopram')">
             Oxalato de Escitalopram
@@ -273,12 +275,25 @@
         }
 
         function copyPrescription() {
-            const output = document.getElementById('prescription-output');
-    const text = output.innerText; // Muda de textContent para innerText
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Prescrição copiada com sucesso!');
-    });
+    const output = document.getElementById('prescription-output');
+    const plainText = output.innerHTML
+        .replace(/<br>/g, '\n') // Converte <br> em quebras de linha
+        .replace(/<\/?strong>/g, '**'); // Substitui <strong> por marcação em negrito (**)
+
+    // Cria um textarea temporário
+    const tempTextArea = document.createElement('textarea');
+    tempTextArea.value = plainText; // Define o valor como texto simples com marcações
+
+    document.body.appendChild(tempTextArea); // Adiciona ao body
+    tempTextArea.select(); // Seleciona o texto
+    document.execCommand('copy'); // Copia o conteúdo
+
+    document.body.removeChild(tempTextArea); // Remove o elemento temporário
+    alert('Prescrição copiada com sucesso!');
 }
+
+
+
         function clearPrescription() {
             const output = document.getElementById('prescription-output');
             output.innerHTML = '';
@@ -286,5 +301,34 @@
             prescriptionCounter = 1;
         }
     </script>
+    <script>
+        async function copyPrescription() {
+            const output = document.getElementById('prescription-output');
+        
+            // Clonar o conteúdo e limpar estilos antes da cópia
+            const clonedOutput = output.cloneNode(true);
+            cleanStyles(clonedOutput);
+        
+            try {
+                await navigator.clipboard.write([
+                    new ClipboardItem({
+                        "text/html": new Blob([clonedOutput.innerHTML], { type: "text/html" }),
+                        "text/plain": new Blob([output.innerText], { type: "text/plain" })
+                    })
+                ]);
+                console.log('Prescrição copiada com sucesso!');
+            } catch (err) {
+                console.error('Falha ao copiar: ', err);
+                alert('Erro ao copiar a prescrição!');
+            }
+        }
+        
+        // Função para remover estilos inline
+        function cleanStyles(element) {
+            const elements = element.querySelectorAll("*");
+            elements.forEach(el => el.removeAttribute("style"));
+        }
+        </script>
+        
 </body>
 </html>
