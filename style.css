@@ -1,11 +1,12 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
+  color: #333;
 }
 
 button {
+  margin: 10px;
   padding: 10px;
-  margin: 5px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -27,9 +28,8 @@ button:hover {
 }
 
 .popup-content {
-  background: #fff;
+  background: white;
   margin: 10% auto;
   padding: 20px;
   width: 300px;
-  border-radius: 8px;
 }
