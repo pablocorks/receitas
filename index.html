@@ -70,6 +70,20 @@
             background-color: #28a745;
             color: white;
         }
+#cancel-btn {
+    background-color: #dc3545; /* Cor vermelha */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+#cancel-btn:hover {
+    background-color: #c82333;
+}
+
+
+        
         #clear-btn {
             background-color: #dc3545;
             color: white;
@@ -145,36 +159,40 @@
 
 
     <!-- Modal para seleção de medicamentos -->
-    <div id="medicationModal" class="modal">
-        <div class="modal-content">
-            <h2 id="modal-title"></h2>
-            <form id="medication-form">
-                <div>
-                    <label>Forma de Uso:</label>
-                    <select id="forma-uso" required>
-                        <option value="USO ORAL">USO ORAL</option>
-                        <option value="USO IM">USO IM</option>
-                        <option value="USO INTRANASAL">USO INTRANASAL</option>
-                        <option value="USO VIA RETAL">USO VIA RETAL</option>
-                        <option value="USO VIA INALAÇÃO">USO VIA INALAÇÃO</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Dose:</label>
-                    <select id="dose" required></select>
-                </div>
-                <div>
-                    <label>Quantidade:</label>
-                    <input type="number" id="quantidade" required min="1">
-                </div>
-                <div>
-                    <label>Instrução de Uso:</label>
-                    <select id="instrucao" required></select>
-                </div>
+<div id="medicationModal" class="modal">
+    <div class="modal-content">
+        <h2 id="modal-title"></h2>
+        <form id="medication-form">
+            <div>
+                <label>Forma de Uso:</label>
+                <select id="forma-uso" required>
+                    <option value="USO ORAL">USO ORAL</option>
+                    <option value="USO IM">USO IM</option>
+                    <option value="USO INTRANASAL">USO INTRANASAL</option>
+                    <option value="USO VIA RETAL">USO VIA RETAL</option>
+                    <option value="USO VIA INALAÇÃO">USO VIA INALAÇÃO</option>
+                </select>
+            </div>
+            <div>
+                <label>Dose:</label>
+                <select id="dose" required></select>
+            </div>
+            <div>
+                <label>Quantidade:</label>
+                <input type="number" id="quantidade" required min="1">
+            </div>
+            <div>
+                <label>Instrução de Uso:</label>
+                <select id="instrucao" required></select>
+            </div>
+            <div class="action-buttons">
                 <button type="submit">OK</button>
-            </form>
-        </div>
+                <button type="button" id="cancel-btn" onclick="closeModal()">Cancelar</button>
+            </div>
+        </form>
     </div>
+</div>
+
 
     <script>
         const medications = {
@@ -644,26 +662,32 @@
         let prescriptions = [];
         let prescriptionCounter = 1;
 
-        function openModal(medication) {
-            const modal = document.getElementById('medicationModal');
-            const modalTitle = document.getElementById('modal-title');
-            const doseSelect = document.getElementById('dose');
-            const instructionSelect = document.getElementById('instrucao');
+       function closeModal() {
+    const modal = document.getElementById('medicationModal');
+    modal.style.display = 'none'; // Fecha o modal
+}
 
-            modalTitle.textContent = medication;
-            
-            // Populate doses
-            doseSelect.innerHTML = medications[medication].doses
-                .map(dose => `<option value="${dose}">${dose}</option>`).join('');
+// Alterações na função de abrir o modal
+function openModal(medication) {
+    const modal = document.getElementById('medicationModal');
+    const modalTitle = document.getElementById('modal-title');
+    const doseSelect = document.getElementById('dose');
+    const instructionSelect = document.getElementById('instrucao');
 
-            // Populate instructions
-            instructionSelect.innerHTML = medications[medication].instructions
-                .map((instruction, index) => 
-                    `<option value="${index}">${instruction}</option>`
-                ).join('');
+    modalTitle.textContent = medication;
+    
+    // Populate doses
+    doseSelect.innerHTML = medications[medication].doses
+        .map(dose => `<option value="${dose}">${dose}</option>`).join('');
 
-            modal.style.display = 'block';
-        }
+    // Populate instructions
+    instructionSelect.innerHTML = medications[medication].instructions
+        .map((instruction, index) => 
+            `<option value="${index}">${instruction}</option>`
+        ).join('');
+
+    modal.style.display = 'block'; // Abre o modal
+}
 
         document.getElementById('medication-form').onsubmit = function(e) {
             e.preventDefault();
@@ -767,6 +791,7 @@
             prescriptions = [];
             prescriptionCounter = 1;
         }
+        
     </script>
     <script>
         async function copyPrescription() {
