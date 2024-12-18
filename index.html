@@ -11,15 +11,6 @@
             padding: 20px;
             background-color: #f4f4f4;
         }
-        .modal-content label, 
-.modal-content input, 
-.modal-content select, 
-.modal-content textarea {
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    text-transform: uppercase;
-    font-weight: normal;
-}
         .container {
             background-color: white;
             padding: 20px;
@@ -29,13 +20,57 @@
         .medication-btn {
             display: inline-block;
             width: auto;
-            padding: 5px 10px; /* Ajuste opcional do preenchimento */
+            padding: 5px 10px;
             margin: 10px 0;
             background-color: #e49228;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+        }
+        #prescription-output {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            min-height: 100px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 8px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .action-buttons button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #copy-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        #cancel-btn {
+            background-color: #dc3545;
+            color: white;
         }
 /* Estilo para o antidepressivo ISRS */
 .button-ISRS {
@@ -136,77 +171,18 @@
 .button-antihistaminico {
     background-color: #D35400; /* Laranja Escuro */
 }
-
-        #prescription-output {
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            padding: 15px;
-            min-height: 100px;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%;
-            border-radius: 8px;
-        }
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-
-        }
-        .action-buttons button {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-
-        }
-        #copy-btn {
-            background-color: #28a745;
-            color: white;
-        }
-#cancel-btn {
-    background-color: #dc3545; /* Cor vermelha */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-}
-#cancel-btn:hover {
-    background-color: #c82333;
-}   
-        #clear-btn {
-            background-color: #dc3545;
-            color: white;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h3>Prescrições Dr. Pablo Xavier</h3>
-
 <button class="medication-btn button-ISRS" onclick="openModal('Oxalato de Escitalopram')">Oxalato de Escitalopram</button>
 <button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Sertralina')">Cloridrato de Sertralina</button>
 <button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Citalopram')">Cloridrato de Citalopram</button>
 <button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Paroxetina')">Cloridrato de Paroxetina</button>
 <button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Fluoxetina')">Cloridrato de Fluoxetina</button>
 <button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Fluvoxamina')">Cloridrato de Fluvoxamina</button>
-    <button class="medication-btn button-IRSN" onclick="openModal('Cloridrato de Venlafaxina')">Cloridrato de Venlafaxina</button>
+<button class="medication-btn button-IRSN" onclick="openModal('Cloridrato de Venlafaxina')">Cloridrato de Venlafaxina</button>
 <button class="medication-btn button-IRSN" onclick="openModal('Cloridrato de Desvenlafaxina')">Cloridrato de Desvenlafaxina</button>
 <button class="medication-btn button-IRSN" onclick="openModal('Cloridrato de Duloxetina')">Cloridrato de Duloxetina</button>
 <button class="medication-btn button-antidepressivo-atipico" onclick="openModal('Cloridrato de Bupropiona XL')">Cloridrato de Bupropiona XL</button>
@@ -246,93 +222,63 @@
 <button class="medication-btn button-antipsicotico" onclick="openModal('Cloridrato de Agomelatina')">Cloridrato de Agomelatina</button>
 <button class="medication-btn button-antipsicotico" onclick="openModal('Cloridrato de Clorazepato')">Cloridrato de Clorazepato</button>
 <button class="medication-btn button-beta-bloqueador" onclick="openModal('Propranolol')">Propranolol</button>
-
-
-
-    <div id="prescription-output"></div>
-
-    <div class="action-buttons">
-        <button id="copy-btn" onclick="copyPrescription()">Copiar Prescrição</button>
-        <button id="clear-btn" onclick="clearPrescription()">Limpar Prescrição</button>
-    </div>
-</div>
-
-
-    <!-- Modal para seleção de medicamentos -->
-<div id="medicationModal" class="modal">
-    <div class="modal-content">
-        <h3 id="modal-title"></h3>
- <form id="medication-form">
-    <div>
-        <label>Forma de Uso:</label>
-        <select id="forma-uso" required>
-            <option value="USO ORAL">USO ORAL</option>
-            <option value="USO IM">USO IM</option>
-            <option value="USO INTRANASAL">USO INTRANASAL</option>
-            <option value="USO VIA RETAL">USO VIA RETAL</option>
-            <option value="USO VIA INALAÇÃO">USO VIA INALAÇÃO</option>
-        </select>
-    </div>
-
-    <div>
-        <label>
-            <input type="checkbox" id="enable-orientation">
-            Inserir Orientações
-        </label>
-    </div>
-
-    <div>
-        <label>Dose:</label>
-        <div id="dose-options">
-            <!-- Botões de seleção de dose serão gerados dinamicamente pelo JavaScript -->
+       
+ <div id="prescription-output"></div>
+        <div class="action-buttons">
+            <button id="copy-btn" onclick="copyPrescription()">Copiar Prescrição</button>
+            <button id="clear-btn" onclick="clearPrescription()">Limpar Prescrição</button>
         </div>
     </div>
 
-    <div style="display: none;">
-        <!-- Campo oculto para armazenar a dose selecionada -->
-        <input type="hidden" id="dose" required>
-    </div>
-
-    <div>
-        <label>Quantidade:</label>
-        <input type="number" id="quantidade" required min="1">
-    </div>
-
-    <div>
-        <label>Instrução de Uso:</label>
-        <div id="instruction-options">
-            <!-- Botões de seleção de instrução serão gerados dinamicamente pelo JavaScript -->
+    <div id="medicationModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title"></h3>
+            <form id="medication-form">
+                <div>
+                    <label>Forma de Uso:</label>
+                    <div id="forma-uso-options">
+                        <label><input type="checkbox" value="USO ORAL"> USO ORAL</label><br>
+                        <label><input type="checkbox" value="USO IM"> USO IM</label><br>
+                        <label><input type="checkbox" value="USO INTRANASAL"> USO INTRANASAL</label><br>
+                    </div>
+                </div>
+                <div>
+                    <label>Orientações:</label>
+                    <input type="checkbox" id="enable-orientation">
+                </div>
+                <div>
+                    <label>Dose:</label>
+                    <div id="dose-options"></div>
+                </div>
+                <div>
+                    <label>Quantidade:</label>
+                    <input type="number" id="quantidade" required min="1">
+                </div>
+                <div>
+                    <label>Instruções:</label>
+                    <div id="instruction-options"></div>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit">OK</button>
+                    <button type="button" id="cancel-btn" onclick="closeModal()">Cancelar</button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <div style="display: none;">
-        <!-- Campo oculto para armazenar a instrução selecionada -->
-        <input type="hidden" id="instrucao" required>
-    </div>
-
-    <div class="action-buttons">
-        <button type="submit">OK</button>
-        <button type="button" id="cancel-btn" onclick="closeModal()">Cancelar</button>
-    </div>
-</form>
-
-    </div>
-</div>
-
 
     <script>
         const medications = {
-    'Oxalato de Escitalopram': {
-        doses: ['10mg', '15mg', '20mg'],
-        brands: 'Reconter®, Fusor®, Esc® ou Eudok®',
-        instructions: [
-            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-            'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
-        ],
-        orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
-    },
-    'Cloridrato de Sertralina': {
+            'Oxalato de Escitalopram': {
+                doses: ['10mg', '15mg', '20mg'],
+                brands: 'Reconter®, Fusor®, Esc® ou Eudok®',
+                instructions: [
+                    'Tomar meio comprimido por 10 dias, depois 1 por dia.',
+                    'Tomar 1 comprimido por dia pela manhã.',
+                    'Tomar 1 comprimido por dia antes de dormir.'
+                ],
+                orientations: 'Efeitos colaterais podem incluir náuseas e tontura. Consulte seu médico.'
+            }
+        'Cloridrato de Sertralina': {
         doses: ['25mg', '50mg', '100mg'],
         brands: 'Zoloft®, Assert®, Serenata®, Tolrest® ou Afetus®',
         instructions: [
@@ -782,198 +728,77 @@
         orientations: 'Pode causar tontura, fadiga, bradicardia. Alguns pacientes podem experimentar alterações no sono ou humor. Importante não interromper abruptamente e manter acompanhamento médico regular.'
     }
 };
-
-
-
         let prescriptions = [];
-        let prescriptionCounter = 1;
 
-       function closeModal() {
-    const modal = document.getElementById('medicationModal');
-    modal.style.display = 'none'; // Fecha o modal
-}
-if (document.getElementById('enable-orientation').checked) {
-    prescriptionText += `ORIENTAÇÕES:\n${p.orientacoes}\n`;
-}
+        function openModal(medication) {
+            const modal = document.getElementById('medicationModal');
+            const modalTitle = document.getElementById('modal-title');
+            const doseOptions = document.getElementById('dose-options');
+            const instructionOptions = document.getElementById('instruction-options');
 
-// Alterações na função de abrir o modal
-function openModal(medication) {
-    const modal = document.getElementById('medicationModal');
-    const modalTitle = document.getElementById('modal-title');
-    const doseSelect = document.getElementById('dose');
-    const instructionTextarea = document.getElementById('instrucao');
+            modalTitle.textContent = medication;
 
-    modalTitle.textContent = medication;
-    
-    // Populate doses
-    doseSelect.innerHTML = medications[medication].doses
-        .map(dose => `<option value="${dose}">${dose}</option>`).join('');
+            doseOptions.innerHTML = medications[medication].doses
+                .map(dose => `<label><input type="checkbox" value="${dose}"> ${dose}</label><br>`)
+                .join('');
 
-    // Populate instructions
-    instructionTextarea.value = medications[medication].instructions[0];  // Aqui usamos o primeiro item como padrão
-    instructionTextarea.rows = Math.max(4, medications[medication].instructions.length); // Ajusta a altura conforme o número de instruções
+            instructionOptions.innerHTML = medications[medication].instructions
+                .map((instruction, index) => `<label><input type="checkbox" value="${index}"> ${instruction}</label><br>`)
+                .join('');
 
-    modal.style.display = 'block';
-}
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('medicationModal').style.display = 'none';
+        }
 
         document.getElementById('medication-form').onsubmit = function(e) {
             e.preventDefault();
+
             const medication = document.getElementById('modal-title').textContent;
-            const formaUso = document.getElementById('forma-uso').value;
-            const dose = document.getElementById('dose').value;
+            const doses = Array.from(document.querySelectorAll('#dose-options input:checked')).map(cb => cb.value);
+            const instructions = Array.from(document.querySelectorAll('#instruction-options input:checked')).map(cb => medications[medication].instructions[cb.value]);
             const quantidade = document.getElementById('quantidade').value;
-            const instrucaoIndex = document.getElementById('instrucao').value;
+            const includeOrientation = document.getElementById('enable-orientation').checked;
 
             const newPrescription = {
                 medication: medication,
-                formaUso: formaUso,
-                dose: dose,
+                doses: doses.join(', '),
                 quantidade: quantidade,
-                instrucao: medications[medication].instructions[instrucaoIndex],
-                orientacoes: medications[medication].orientations,
+                instructions: instructions.join('\n'),
+                orientation: includeOrientation ? medications[medication].orientations : '',
                 brands: medications[medication].brands
             };
-const instructionContainer = document.getElementById('instruction-options');
-instructionContainer.innerHTML = medications[medication].instructions
-    .map((instruction, index) =>
-        `<button type="button" class="instruction-btn" data-index="${index}">${instruction}</button>`
-    ).join('');
-    
-// Adicionar evento para capturar a instrução selecionada
-document.querySelectorAll('.instruction-btn').forEach(btn => {
-    btn.onclick = function() {
-        document.querySelectorAll('.instruction-btn').forEach(b => b.style.backgroundColor = '');
-        this.style.backgroundColor = '#4CAF50'; // Exemplo de cor de seleção
-        instructionTextarea.value = this.textContent; // Define o valor no campo oculto
-    };
-});
 
             prescriptions.push(newPrescription);
             renderPrescription();
-            document.getElementById('medicationModal').style.display = 'none';
-            this.reset();
+            closeModal();
         };
-const doseContainer = document.getElementById('dose-options');
-doseContainer.innerHTML = medications[medication].doses
-    .map(dose => `<button type="button" class="dose-btn">${dose}</button>`).join('');
-
-// Adicionar evento para capturar a dose selecionada
-document.querySelectorAll('.dose-btn').forEach(btn => {
-    btn.onclick = function() {
-        document.querySelectorAll('.dose-btn').forEach(b => b.style.backgroundColor = '');
-        this.style.backgroundColor = '#4CAF50'; // Exemplo de cor de seleção
-        document.getElementById('dose').value = this.textContent; // Atualiza o valor da dose
-    };
-});
 
         function renderPrescription() {
             const output = document.getElementById('prescription-output');
-            const groupedPrescriptions = {};
+            output.innerHTML = prescriptions.map((p, i) => `
+                <strong>${i + 1}. ${p.medication}</strong><br>
+                Doses: ${p.doses}<br>
+                Quantidade: ${p.quantidade}<br>
+                Instruções: ${p.instructions}<br>
+                Marcas: ${p.brands}<br>
+                ${p.orientation ? `Orientações: ${p.orientation}<br>` : ''}
+            `).join('<br>');
+        }
 
-            // Group by forma de uso
-            prescriptions.forEach(p => {
-                if (!groupedPrescriptions[p.formaUso]) {
-                    groupedPrescriptions[p.formaUso] = [];
-                }
-                groupedPrescriptions[p.formaUso].push(p);
-            });
-
-            // Sort each group alphabetically
-            Object.keys(groupedPrescriptions).forEach(key => {
-                groupedPrescriptions[key].sort((a, b) => 
-                    a.medication.localeCompare(b.medication)
-                );
-            });
-
-            let prescriptionText = '';
-            prescriptionCounter = 1;
-
-            Object.keys(groupedPrescriptions).forEach((formaUso, groupIndex) => {
-                prescriptionText += `${formaUso}\n`;
-                groupedPrescriptions[formaUso].forEach((p, index, array) => {
-                    prescriptionText += 
-                        `${prescriptionCounter} - <strong>${p.medication}</strong> <strong>${p.dose}</strong> ________ ${p.quantidade} cp\n` +
-                        `(${p.brands})\n` +
-                        `- ${p.instrucao}\n`;
-                    
-                    if (p.orientacoes) {
-                        prescriptionText += `ORIENTAÇÕES:\n${p.orientacoes}\n`;
-                    }
-                    
-                    // Adiciona uma linha em branco entre medicamentos, exceto no último
-                    if (index < array.length - 1) {
-                        prescriptionText += '\n';
-                    }
-                    
-                    prescriptionCounter++;
-                });
-
-                // Adiciona duas linhas em branco entre grupos de medicamentos, 
-                // exceto após o último grupo
-                if (groupIndex < Object.keys(groupedPrescriptions).length - 1) {
-                    prescriptionText += '\n\n';
-                }
-            });
-
-            output.innerHTML = prescriptionText.replace(/\n/g, '<br>');
+        function clearPrescription() {
+            prescriptions = [];
+            document.getElementById('prescription-output').innerHTML = '';
         }
 
         function copyPrescription() {
-    const output = document.getElementById('prescription-output');
-    const plainText = output.innerHTML
-        .replace(/<br>/g, '\n') // Converte <br> em quebras de linha
-        .replace(/<\/?strong>/g, '**'); // Substitui <strong> por marcação em negrito (**)
-
-    // Cria um textarea temporário
-    const tempTextArea = document.createElement('textarea');
-    tempTextArea.value = plainText; // Define o valor como texto simples com marcações
-
-    document.body.appendChild(tempTextArea); // Adiciona ao body
-    tempTextArea.select(); // Seleciona o texto
-    document.execCommand('copy'); // Copia o conteúdo
-
-    document.body.removeChild(tempTextArea); // Remove o elemento temporário
-    alert('Prescrição copiada com sucesso!');
-}
-
-
-
-        function clearPrescription() {
-            const output = document.getElementById('prescription-output');
-            output.innerHTML = '';
-            prescriptions = [];
-            prescriptionCounter = 1;
+            const output = document.getElementById('prescription-output').innerText;
+            navigator.clipboard.writeText(output).then(() => {
+                alert('Prescrição copiada para a área de transferência!');
+            });
         }
-        
     </script>
-    <script>
-        async function copyPrescription() {
-            const output = document.getElementById('prescription-output');
-        
-            // Clonar o conteúdo e limpar estilos antes da cópia
-            const clonedOutput = output.cloneNode(true);
-            cleanStyles(clonedOutput);
-        
-            try {
-                await navigator.clipboard.write([
-                    new ClipboardItem({
-                        "text/html": new Blob([clonedOutput.innerHTML], { type: "text/html" }),
-                        "text/plain": new Blob([output.innerText], { type: "text/plain" })
-                    })
-                ]);
-                console.log('Prescrição copiada com sucesso!');
-            } catch (err) {
-                console.error('Falha ao copiar: ', err);
-                alert('Erro ao copiar a prescrição!');
-            }
-        }
-        
-        // Função para remover estilos inline
-        function cleanStyles(element) {
-            const elements = element.querySelectorAll("*");
-            elements.forEach(el => el.removeAttribute("style"));
-        }
-        </script>
-        
 </body>
 </html>
