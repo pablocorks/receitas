@@ -776,17 +776,25 @@
             closeModal();
         };
 
-        function renderPrescription() {
-            const output = document.getElementById('prescription-output');
-            output.innerHTML = prescriptions.map((p, i) => `
-                <strong>${i + 1}. ${p.medication}</strong><br>
-                Doses: ${p.doses}<br>
-                Quantidade: ${p.quantidade}<br>
-                Instruções: ${p.instructions}<br>
-                Marcas: ${p.brands}<br>
-                ${p.orientation ? `Orientações: ${p.orientation}<br>` : ''}
-            `).join('<br>');
+       function renderPrescription() {
+    const output = document.getElementById('prescription-output');
+    let prescriptionText = '';
+
+    prescriptionCounter = 1;
+    prescriptions.forEach(p => {
+        prescriptionText += `${prescriptionCounter} - ${p.medication} ${p.dose} ________ ${p.quantidade} cp\n`;
+        prescriptionText += `(${p.brands})\n`;
+        prescriptionText += ` - ${p.instrucao}\n`;
+        if (p.orientacoes) {
+            prescriptionText += ` - ${p.orientacoes}\n`;
         }
+        prescriptionText += '\n';
+        prescriptionCounter++;
+    });
+
+    output.innerHTML = prescriptionText.replace(/\n/g, '<br>');
+}
+
 
         function clearPrescription() {
             prescriptions = [];
