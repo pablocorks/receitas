@@ -11,6 +11,15 @@
             padding: 20px;
             background-color: #f4f4f4;
         }
+        .modal-content label, 
+.modal-content input, 
+.modal-content select, 
+.modal-content textarea {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
         .container {
             background-color: white;
             padding: 20px;
@@ -252,35 +261,61 @@
     <!-- Modal para seleção de medicamentos -->
 <div id="medicationModal" class="modal">
     <div class="modal-content">
-        <h2 id="modal-title"></h2>
-        <form id="medication-form">
-            <div>
-                <label>Forma de Uso:</label>
-                <select id="forma-uso" required>
-                    <option value="USO ORAL">USO ORAL</option>
-                    <option value="USO IM">USO IM</option>
-                    <option value="USO INTRANASAL">USO INTRANASAL</option>
-                    <option value="USO VIA RETAL">USO VIA RETAL</option>
-                    <option value="USO VIA INALAÇÃO">USO VIA INALAÇÃO</option>
-                </select>
-            </div>
-            <div>
-                <label>Dose:</label>
-                <select id="dose" required></select>
-            </div>
-            <div>
-                <label>Quantidade:</label>
-                <input type="number" id="quantidade" required min="1">
-            </div>
-            <div>
-                <label>Instrução de Uso:</label>
-                <textarea id="instrucao" rows="4" required></textarea>
-            </div>
-            <div class="action-buttons">
-                <button type="submit">OK</button>
-                <button type="button" id="cancel-btn" onclick="closeModal()">Cancelar</button>
-            </div>
-        </form>
+        <h3 id="modal-title"></h3>
+ <form id="medication-form">
+    <div>
+        <label>Forma de Uso:</label>
+        <select id="forma-uso" required>
+            <option value="USO ORAL">USO ORAL</option>
+            <option value="USO IM">USO IM</option>
+            <option value="USO INTRANASAL">USO INTRANASAL</option>
+            <option value="USO VIA RETAL">USO VIA RETAL</option>
+            <option value="USO VIA INALAÇÃO">USO VIA INALAÇÃO</option>
+        </select>
+    </div>
+
+    <div>
+        <label>
+            <input type="checkbox" id="enable-orientation">
+            Inserir Orientações
+        </label>
+    </div>
+
+    <div>
+        <label>Dose:</label>
+        <div id="dose-options">
+            <!-- Botões de seleção de dose serão gerados dinamicamente pelo JavaScript -->
+        </div>
+    </div>
+
+    <div style="display: none;">
+        <!-- Campo oculto para armazenar a dose selecionada -->
+        <input type="hidden" id="dose" required>
+    </div>
+
+    <div>
+        <label>Quantidade:</label>
+        <input type="number" id="quantidade" required min="1">
+    </div>
+
+    <div>
+        <label>Instrução de Uso:</label>
+        <div id="instruction-options">
+            <!-- Botões de seleção de instrução serão gerados dinamicamente pelo JavaScript -->
+        </div>
+    </div>
+
+    <div style="display: none;">
+        <!-- Campo oculto para armazenar a instrução selecionada -->
+        <input type="hidden" id="instrucao" required>
+    </div>
+
+    <div class="action-buttons">
+        <button type="submit">OK</button>
+        <button type="button" id="cancel-btn" onclick="closeModal()">Cancelar</button>
+    </div>
+</form>
+
     </div>
 </div>
 
@@ -757,6 +792,9 @@
     const modal = document.getElementById('medicationModal');
     modal.style.display = 'none'; // Fecha o modal
 }
+if (document.getElementById('enable-orientation').checked) {
+    prescriptionText += `ORIENTAÇÕES:\n${p.orientacoes}\n`;
+}
 
 // Alterações na função de abrir o modal
 function openModal(medication) {
@@ -795,12 +833,38 @@ function openModal(medication) {
                 orientacoes: medications[medication].orientations,
                 brands: medications[medication].brands
             };
+const instructionContainer = document.getElementById('instruction-options');
+instructionContainer.innerHTML = medications[medication].instructions
+    .map((instruction, index) =>
+        `<button type="button" class="instruction-btn" data-index="${index}">${instruction}</button>`
+    ).join('');
+    
+// Adicionar evento para capturar a instrução selecionada
+document.querySelectorAll('.instruction-btn').forEach(btn => {
+    btn.onclick = function() {
+        document.querySelectorAll('.instruction-btn').forEach(b => b.style.backgroundColor = '');
+        this.style.backgroundColor = '#4CAF50'; // Exemplo de cor de seleção
+        instructionTextarea.value = this.textContent; // Define o valor no campo oculto
+    };
+});
 
             prescriptions.push(newPrescription);
             renderPrescription();
             document.getElementById('medicationModal').style.display = 'none';
             this.reset();
         };
+const doseContainer = document.getElementById('dose-options');
+doseContainer.innerHTML = medications[medication].doses
+    .map(dose => `<button type="button" class="dose-btn">${dose}</button>`).join('');
+
+// Adicionar evento para capturar a dose selecionada
+document.querySelectorAll('.dose-btn').forEach(btn => {
+    btn.onclick = function() {
+        document.querySelectorAll('.dose-btn').forEach(b => b.style.backgroundColor = '');
+        this.style.backgroundColor = '#4CAF50'; // Exemplo de cor de seleção
+        document.getElementById('dose').value = this.textContent; // Atualiza o valor da dose
+    };
+});
 
         function renderPrescription() {
             const output = document.getElementById('prescription-output');
