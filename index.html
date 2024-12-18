@@ -183,7 +183,7 @@
             </div>
             <div>
                 <label>Instrução de Uso:</label>
-                <select id="instrucao" required></select>
+                <textarea id="instrucao" rows="4" required></textarea>
             </div>
             <div class="action-buttons">
                 <button type="submit">OK</button>
@@ -672,7 +672,7 @@ function openModal(medication) {
     const modal = document.getElementById('medicationModal');
     const modalTitle = document.getElementById('modal-title');
     const doseSelect = document.getElementById('dose');
-    const instructionSelect = document.getElementById('instrucao');
+    const instructionTextarea = document.getElementById('instrucao');
 
     modalTitle.textContent = medication;
     
@@ -681,12 +681,10 @@ function openModal(medication) {
         .map(dose => `<option value="${dose}">${dose}</option>`).join('');
 
     // Populate instructions
-    instructionSelect.innerHTML = medications[medication].instructions
-        .map((instruction, index) => 
-            `<option value="${index}">${instruction}</option>`
-        ).join('');
+    instructionTextarea.value = medications[medication].instructions[0];  // Aqui usamos o primeiro item como padrão
+    instructionTextarea.rows = Math.max(4, medications[medication].instructions.length); // Ajusta a altura conforme o número de instruções
 
-    modal.style.display = 'block'; // Abre o modal
+    modal.style.display = 'block';
 }
 
         document.getElementById('medication-form').onsubmit = function(e) {
