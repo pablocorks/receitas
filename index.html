@@ -715,7 +715,7 @@
                 prescriptionText += `${formaUso}\n`;
                 groupedPrescriptions[formaUso].forEach((p, index, array) => {
                     prescriptionText += 
-                        `${prescriptionCounter} - <strong>${p.medication}</strong> ${p.dose} ________ ${p.quantidade} cp\n` +
+                        `${prescriptionCounter} - <strong>${p.medication}</strong> <strong>${p.dose}</strong> ________ ${p.quantidade} cp\n` +
                         `(${p.brands})\n` +
                         `- ${p.instrucao}\n`;
                     
