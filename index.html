@@ -28,6 +28,25 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+
+/* Estilo para o tipo 1 (botão azul) */
+.button-type-1 {
+    background-color: #007bff; /* Azul */
+}
+
+/* Estilo para o tipo 2 (botão verde) */
+.button-type-2 {
+    background-color: #28a745; /* Verde */
+}
+
+/* Estilo para o tipo 3 (botão vermelho, como exemplo) */
+.button-type-3 {
+    background-color: #dc3545; /* Vermelho */
+}
+
+
+        
         #prescription-output {
             margin-top: 20px;
             border: 1px solid #ddd;
@@ -97,10 +116,10 @@
 <div class="container">
     <h3>Prescrições Dr. Pablo Xavier</h3>
 
-    <button class="medication-btn" onclick="openModal('Oxalato de Escitalopram')">Oxalato de Escitalopram</button>
-    <button class="medication-btn" onclick="openModal('Cloridrato de Sertralina')">Cloridrato de Sertralina</button>
-    <button class="medication-btn" onclick="openModal('Cloridrato de Bupropiona XL')">Cloridrato de Bupropiona XL</button>
-    <button class="medication-btn" onclick="openModal('Cloridrato de Venlafaxina')">Cloridrato de Venlafaxina</button>
+    <button class="medication-btn button-type-1" onclick="openModal('Oxalato de Escitalopram')">Oxalato de Escitalopram</button>
+    <button class="medication-btn button-type-1" onclick="openModal('Cloridrato de Sertralina')">Cloridrato de Sertralina</button>
+    <button class="medication-btn button-type-2" onclick="openModal('Cloridrato de Bupropiona XL')">Cloridrato de Bupropiona XL</button>
+    <button class="medication-btn button-type-3" onclick="openModal('Cloridrato de Venlafaxina')">Cloridrato de Venlafaxina</button>
     <button class="medication-btn" onclick="openModal('Ácido Valproico')">Ácido Valproico</button>
     <button class="medication-btn" onclick="openModal('Bromidrato de Aripiprazol')">Bromidrato de Aripiprazol</button>
     <button class="medication-btn" onclick="openModal('Clomipramina')">Clomipramina</button>
