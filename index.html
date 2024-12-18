@@ -178,44 +178,468 @@
 
     <script>
         const medications = {
-            'Oxalato de Escitalopram': {
-                doses: ['10mg', '15mg', '20mg'],
-                brands: 'Reconter®, Fusor®, Esc® ou Eudok®',
-                instructions: [
-                    'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-                    'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-                    'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
-                ],
-                orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
-            },
-            'Cloridrato de Sertralina': {
-                doses: ['25mg', '50mg', '100mg'],
-                brands: 'Zoloft®, Assert®, Serenata®, Tolrest® ou Afetus®',
-                instructions: [
-                    'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-                    'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-                    'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
-                ],
-                orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
-            },
-            'Cloridrato de Bupropiona XL': {
-                doses: ['150mg', '300mg'],
-                brands: 'Alpes XL®, Bup XL®, Bupium XL®, Seth®, Zetron XL®',
-                instructions: [
-                    'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
-                ]
-            },
-            'Cloridrato de Venlafaxina': {
-                doses: ['37,5mg', '75mg', '150mg'],
-                brands: 'Efexor®, Vinfa®, Venlex®',
-                instructions: [
-                    'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-                    'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-                    'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
-                ],
-                orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
-            }
-        };
+    'Oxalato de Escitalopram': {
+        doses: ['10mg', '15mg', '20mg'],
+        brands: 'Reconter®, Fusor®, Esc® ou Eudok®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
+    },
+    'Cloridrato de Sertralina': {
+        doses: ['25mg', '50mg', '100mg'],
+        brands: 'Zoloft®, Assert®, Serenata®, Tolrest® ou Afetus®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
+    },
+    'Cloridrato de Bupropiona XL': {
+        doses: ['150mg', '300mg'],
+        brands: 'Alpes XL®, Bup XL®, Bupium XL®, Seth®, Zetron XL®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ]
+    },
+    'Cloridrato de Venlafaxina': {
+        doses: ['37,5mg', '75mg', '150mg'],
+        brands: 'Efexor®, Vinfa®, Venlex®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
+    },
+    'Ácido Valproico': {
+        doses: ['200mg', '300mg', '500mg'],
+        brands: 'Depakene®, Valpakene®, Ácido Val®, Valproato®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como sonolência, tremores, ganho de peso e possível alteração nos níveis de enzimas hepáticas. É importante realizar acompanhamento médico periódico.'
+    },
+    'Bromidrato de Aripiprazol': {
+        doses: ['5mg', '10mg', '15mg'],
+        brands: 'Abilify®, Arip®, Aristada®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Podem ocorrer efeitos colaterais como ganho de peso, sonolência, inquietação, tontura. Importante seguir acompanhamento médico regular.'
+    },
+    'Clomipramina': {
+        doses: ['10mg', '25mg', '75mg'],
+        brands: 'Anafranil®, Clomic®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Possíveis efeitos colaterais incluem boca seca, constipação, sonolência, ganho de peso. Recomenda-se acompanhamento médico regular.'
+    },
+    'Clonazepam': {
+        doses: ['0,5mg', '1mg', '2mg'],
+        brands: 'Rivotril®, Clozan®, Neozine®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar meio comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Medicamento controlado. Pode causar sonolência, tontura, dependência. Não interromper abruptamente sem orientação médica.'
+    },
+    'Cloridrato de Agomelatina': {
+        doses: ['25mg', '50mg'],
+        brands: 'Valdoxan®, Agome®, Thymanax®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente à noite, antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar sonolência, tontura, ganho de peso. Recomenda-se acompanhamento médico para monitorar possíveis efeitos colaterais e ajuste de dosagem.'
+    },
+    'Cloridrato de Alprazolam': {
+        doses: ['0,5mg', '1mg', '2mg'],
+        brands: 'Frontal®, Apraz®, Ansitec®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar meio comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Medicamento controlado. Pode causar sonolência, dependência. Não interromper abruptamente sem orientação médica. Evitar consumo de álcool durante o tratamento.'
+    },
+    'Cloridrato de Amitriptilina': {
+        doses: ['25mg', '50mg', '75mg'],
+        brands: 'Tryptanol®, Amitril®, Amitriptilina®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Pode causar boca seca, constipação, sonolência, ganho de peso. Importante manter acompanhamento médico regular.'
+    },
+    'Cloridrato de Atomoxetina': {
+        doses: ['10mg', '18mg', '25mg', '40mg', '60mg'],
+        brands: 'Straterra®, Neurofen®, Atomo®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Preferencialmente pela manhã, antes do café da manhã.'
+        ],
+        orientations: 'Pode causar perda de apetite, insônia, tontura. Importante monitorar crescimento em crianças e adolescentes. Seguir rigorosamente a prescrição médica.'
+    },
+    'Cloridrato de Bromazepam': {
+        doses: ['3mg', '6mg'],
+        brands: 'Lexotan®, Broma®, Bromazepam®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar meio comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Medicamento controlado. Pode causar sonolência, tontura, dependência. Não interromper abruptamente sem orientação médica.'
+    },
+      'Cloridrato de Buspirona': {
+        doses: ['5mg', '10mg', '15mg'],
+        brands: 'Buspar®, Ansial®, Buspimed®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, após as refeições, no mesmo horário.'
+        ],
+        orientations: 'Pode causar tontura, sonolência, náuseas. Geralmente bem tolerado, mas é importante manter acompanhamento médico regular.'
+    },
+    'Cloridrato de Carbamazepina': {
+        doses: ['200mg', '400mg', '600mg'],
+        brands: 'Tegretol®, Carbatrol®, Carbamax®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, após as refeições, no mesmo horário.'
+        ],
+        orientations: 'Pode causar tontura, sonolência, visão embaçada. Realizar exames periódicos de sangue para monitorar níveis séricos. Não interromper abruptamente sem orientação médica.'
+    },
+    'Cloridrato de Citalopram': {
+        doses: ['10mg', '20mg', '40mg'],
+        brands: 'Cipramil®, Cital®, Citam®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Durante as primeiras semanas, podem ocorrer efeitos como náuseas, sonolência, insônia ou alterações no sono. É importante manter o tratamento constante e comunicar ao médico qualquer efeito colateral significativo.'
+    },
+    'Cloridrato de Clorazepato': {
+        doses: ['5mg', '10mg', '15mg'],
+        brands: 'Tranxene®, Clorazepam®, Neurocalm®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar meio comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Medicamento controlado. Pode causar sonolência, tontura, dependência. Não interromper abruptamente sem orientação médica. Evitar consumo de álcool durante o tratamento.'
+    },
+    'Cloridrato de Clozapina': {
+        doses: ['25mg', '50mg', '100mg', '200mg'],
+        brands: 'Leponex®, Clozaril®, Clozam®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, seguindo orientação médica precisa.'
+        ],
+        orientations: 'Requer acompanhamento médico rigoroso. Realizar exames de sangue periódicos. Pode causar sonolência, ganho de peso, alterações na contagem de glóbulos brancos. Não interromper o tratamento sem orientação médica.'
+    },
+      'Cloridrato de Desvenlafaxina': {
+        doses: ['50mg', '100mg', '200mg'],
+        brands: 'Pristiq®, Devenlax®, Desvenlor®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar náuseas, boca seca, sudorese, tontura. É importante manter regularidade no tratamento e comunicar ao médico qualquer efeito colateral significativo.'
+    },
+    'Cloridrato de Diazepam': {
+        doses: ['5mg', '10mg', '20mg'],
+        brands: 'Dienpax®, Valium®, Diazepam®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar meio comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Medicamento controlado. Pode causar sonolência, tontura, dependência. Não interromper abruptamente sem orientação médica. Evitar consumo de álcool durante o tratamento.'
+    },
+    'Cloridrato de Doxepina': {
+        doses: ['10mg', '25mg', '75mg'],
+        brands: 'Sinequan®, Doxepin®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Pode causar sonolência, boca seca, ganho de peso, constipação. Importante manter acompanhamento médico regular.'
+    },
+    'Cloridrato de Duloxetina': {
+        doses: ['30mg', '60mg', '90mg'],
+        brands: 'Cymbalta®, Dulox®, Neuroptim®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar náuseas, sonolência, boca seca, constipação. Alguns pacientes podem experimentar alterações no humor inicial. Manter acompanhamento médico para ajustes necessários.'
+    },
+    'Cloridrato de Fluoxetina': {
+        doses: ['10mg', '20mg', '40mg'],
+        brands: 'Prozac®, Fluctin®, Fluoxetina®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar inquietação inicial, nervosismo, insônia ou sonolência. Os efeitos terapêuticos geralmente começam após algumas semanas de uso. Importante manter regularidade no tratamento.'
+    },
+    'Cloridrato de Fluvoxamina': {
+        doses: ['50mg', '100mg', '150mg'],
+        brands: 'Luvox®, Fluxene®, Fluvoxam®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar náuseas, sonolência, insônia, tontura. Alguns pacientes podem experimentar alterações iniciais no sono ou apetite. Importante manter acompanhamento médico regular.'
+    },
+    'Cloridrato de Gabapentina': {
+        doses: ['300mg', '400mg', '600mg'],
+        brands: 'Neurontin®, Gabapen®, Neurax®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, após as refeições, no mesmo horário.'
+        ],
+        orientations: 'Pode causar tontura, sonolência, fadiga. Alguns pacientes podem experimentar ganho de peso. Importante não interromper abruptamente e manter acompanhamento médico.'
+    },
+    'Cloridrato de Haloperidol': {
+        doses: ['1mg', '5mg', '10mg'],
+        brands: 'Haldol®, Halopin®, Neoperidol®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, seguindo orientação médica precisa.'
+        ],
+        orientations: 'Pode causar tremores, rigidez muscular, sonolência. Requer acompanhamento médico rigoroso. Alguns pacientes podem experimentar efeitos extrapiramidais. Não interromper o tratamento sem orientação médica.'
+    },
+    'Cloridrato de Hidroxizina': {
+        doses: ['10mg', '25mg', '50mg'],
+        brands: 'Atarax®, Hidroxil®, Neucalm®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido conforme necessidade para ansiedade ou alergias, seguindo orientação médica.'
+        ],
+        orientations: 'Pode causar sonolência, boca seca, tontura. Importante evitar atividades que exijam atenção total até conhecer a reação individual ao medicamento.'
+    },
+    'Cloridrato de Imipramina': {
+        doses: ['10mg', '25mg', '75mg'],
+        brands: 'Tofranil®, Imipra®, Depressol®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Pode causar boca seca, constipação, ganho de peso, sonolência. Alguns pacientes podem experimentar alterações cardíacas, portanto, acompanhamento médico regular é fundamental.'
+    },
+      'Cloridrato de Lamotrigina': {
+        doses: ['25mg', '50mg', '100mg', '200mg'],
+        brands: 'Lamictal®, Lamitor®, Lamilept®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar tontura, sonolência, dor de cabeça. Requer acompanhamento médico rigoroso. Importante iniciar com dose baixa e aumentar gradualmente para minimizar risco de erupção cutânea.'
+    },
+    'Cloridrato de Lorazepam': {
+        doses: ['1mg', '2mg'],
+        brands: 'Lorax®, Ansietil®, Bassociated®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar meio comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Medicamento controlado. Pode causar sonolência, tontura, dependência. Não interromper abruptamente sem orientação médica. Evitar consumo de álcool durante o tratamento.'
+    },
+    'Cloridrato de Lurasidona': {
+        doses: ['40mg', '80mg', '120mg'],
+        brands: 'Latuda®, Lurassi®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente com alimentos, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Seguindo rigorosamente orientação médica.'
+        ],
+        orientations: 'Pode causar sonolência, náuseas, ganho de peso. Alguns pacientes podem experimentar alterações metabólicas. Importante manter acompanhamento médico regular e realizar exames periódicos.'
+    },
+    'Cloridrato de Metilfenidato': {
+        doses: ['10mg', '20mg', '36mg'],
+        brands: 'Ritalina®, Concerta®, Methylin®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após o café da manhã, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, seguindo rigorosamente orientação médica.'
+        ],
+        orientations: 'Pode causar perda de apetite, insônia, inquietação. Em crianças, é importante monitorar crescimento e desenvolvimento. Não interromper abruptamente sem orientação médica.'
+    },
+    'Cloridrato de Midazolam': {
+        doses: ['7,5mg', '15mg'],
+        brands: 'Dormonid®, Midaz®, Dormire®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar meio comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Medicamento controlado para uso em procedimentos médicos ou tratamento de curto prazo. Pode causar sonolência profunda, tontura, dependência. Usar exclusivamente sob supervisão médica.'
+    },
+    'Cloridrato de Mirtazapina': {
+        doses: ['15mg', '30mg', '45mg'],
+        brands: 'Remeron®, Mirtaz®, Neuropax®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar sonolência significativa, ganho de peso, aumento de apetite. Alguns pacientes podem experimentar boca seca ou tontura. Importante manter acompanhamento médico regular.'
+    },
+    'Cloridrato de Nortriptilina': {
+        doses: ['10mg', '25mg', '75mg'],
+        brands: 'Pamelor®, Nortrip®, Nortilina®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Pode causar boca seca, constipação, retenção urinária, tontura. Alguns pacientes podem experimentar alterações cardíacas, portanto, acompanhamento médico regular é fundamental.'
+    },
+    'Cloridrato de Olanzapina': {
+        doses: ['5mg', '10mg', '15mg', '20mg'],
+        brands: 'Zyprexa®, Olanzapina®, Zopico®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Seguindo rigorosamente orientação médica.'
+        ],
+        orientations: 'Pode causar ganho de peso significativo, sonolência, aumento de apetite. Alguns pacientes podem experimentar alterações metabólicas. Importante realizar exames periódicos e manter acompanhamento médico rigoroso.'
+    },
+    'Cloridrato de Oxcarbazepina': {
+        doses: ['300mg', '600mg', '900mg'],
+        brands: 'Trileptal®, Oxcar®, Neurept®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, após as refeições, no mesmo horário.'
+        ],
+        orientations: 'Pode causar tontura, sonolência, visão embaçada. Realizar exames periódicos de sangue para monitorar níveis séricos. Não interromper abruptamente sem orientação médica.'
+    },
+    'Cloridrato de Paroxetina': {
+        doses: ['10mg', '20mg', '40mg'],
+        brands: 'Pondera®, Paroxetina®, Aropax®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar náuseas, sonolência, insônia, alterações no sono. Os efeitos terapêuticos geralmente começam após algumas semanas de uso. Importante manter regularidade no tratamento.'
+    },
+    'Cloridrato de Pregabalina': {
+        doses: ['75mg', '150mg', '300mg'],
+        brands: 'Lyrica®, Pregabal®, Neurex®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, após as refeições, no mesmo horário.'
+        ],
+        orientations: 'Pode causar tontura, sonolência, ganho de peso. Alguns pacientes podem experimentar edema periférico. Importante não interromper abruptamente e manter acompanhamento médico.'
+    },
+    'Cloridrato de Risperidona': {
+        doses: ['1mg', '2mg', '3mg', '4mg'],
+        brands: 'Risperdal®, Risfren®, Risperidona®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Seguindo rigorosamente orientação médica.'
+        ],
+        orientations: 'Pode causar ganho de peso, sonolência, sintomas extrapiramidais. Alguns pacientes podem experimentar alterações metabólicas. Importante realizar acompanhamento médico regular e exames periódicos.'
+    },
+    'Cloridrato de Topiramato': {
+        doses: ['25mg', '50mg', '100mg'],
+        brands: 'Topamax®, Topirax®, Neurept®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, após as refeições, no mesmo horário.'
+        ],
+        orientations: 'Pode causar perda de peso, formigamento nas extremidades, tontura, sonolência. Alguns pacientes podem experimentar alterações cognitivas. Importante manter acompanhamento médico regular.'
+    },
+    'Cloridrato de Trazodona': {
+        doses: ['50mg', '100mg', '150mg'],
+        brands: 'Donaren®, Trazon®, Depredil®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.'
+        ],
+        orientations: 'Pode causar sonolência, boca seca, tontura. Alguns pacientes podem experimentar alterações na pressão arterial. Importante manter acompanhamento médico regular.'
+    },
+    'Cloridrato de Ziprasidona': {
+        doses: ['40mg', '80mg', '160mg'],
+        brands: 'Geodon®, Zipsid®, Ziproc®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente com alimentos, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Seguindo rigorosamente orientação médica.'
+        ],
+        orientations: 'Pode causar sonolência, tontura, ganho de peso. Alguns pacientes podem experimentar alterações cardíacas. Importante realizar acompanhamento médico regular e exames periódicos.'
+    },
+    'Dimesilato de Lisdexanfetamina': {
+        doses: ['30mg', '50mg', '70mg'],
+        brands: 'Venvanse®, Lisday®, Lisdex®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após o café da manhã, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Seguindo rigorosamente orientação médica.'
+        ],
+        orientations: 'Pode causar perda de apetite, insônia, inquietação. Em crianças, é importante monitorar crescimento e desenvolvimento. Não interromper abruptamente sem orientação médica.'
+    },
+    'Hemifumarato de Quetiapina': {
+        doses: ['50mg', '200mg', '300mg'],
+        brands: 'Seroquel®, Quetium®, Quetidin®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Seguindo rigorosamente orientação médica.'
+        ],
+        orientations: 'Pode causar sonolência significativa, ganho de peso, aumento de apetite. Alguns pacientes podem experimentar alterações metabólicas. Importante realizar acompanhamento médico regular e exames periódicos.'
+    },
+    'Lamotrigina': {
+        doses: ['25mg', '50mg', '100mg', '200mg'],
+        brands: 'Lamictal®, Lamitor®, Lamilept®',
+        instructions: [
+            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar tontura, sonolência, dor de cabeça. Requer acompanhamento médico rigoroso. Importante iniciar com dose baixa e aumentar gradualmente para minimizar risco de erupção cutânea.'
+    },
+    'Metilfenidato': {
+        doses: ['10mg', '20mg', '36mg'],
+        brands: 'Ritalina®, Concerta®, Methylin®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após o café da manhã, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, seguindo rigorosamente orientação médica.'
+        ],
+        orientations: 'Pode causar perda de apetite, insônia, inquietação. Em crianças, é importante monitorar crescimento e desenvolvimento. Não interromper abruptamente sem orientação médica.'
+    },
+    'Mirtazapina': {
+        doses: ['15mg', '30mg', '45mg'],
+        brands: 'Remeron®, Mirtaz®, Neuropax®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        ],
+        orientations: 'Pode causar sonolência significativa, ganho de peso, aumento de apetite. Alguns pacientes podem experimentar boca seca ou tontura. Importante manter acompanhamento médico regular.'
+    },
+     'Prazosina': {
+        doses: ['1mg', '2mg', '5mg'],
+        brands: 'Minipress®, Prazol®, Hipotensor®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido por dia. Seguindo rigorosamente orientação médica.'
+        ],
+        orientations: 'Pode causar tontura, especialmente na primeira dose ou quando há mudança de posição. Importante levantar-se devagar. Pode provocar hipotensão postural. Manter acompanhamento médico regular.'
+    },
+    'Prometazina': {
+        doses: ['25mg', '50mg'],
+        brands: 'Alergin®, Prometa®, Neosono®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+            'Tomar 1 comprimido conforme necessidade para alergias ou como indutor de sono, seguindo orientação médica.'
+        ],
+        orientations: 'Pode causar sonolência significativa. Evitar dirigir ou operar máquinas após a administração. Importante seguir rigorosamente a prescrição médica.'
+    },
+    'Propranolol': {
+        doses: ['10mg', '40mg', '80mg'],
+        brands: 'Inderal®, Propril®, Angilith®',
+        instructions: [
+            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'Tomar 1 comprimido duas vezes ao dia, após as refeições, no mesmo horário.'
+        ],
+        orientations: 'Pode causar tontura, fadiga, bradicardia. Alguns pacientes podem experimentar alterações no sono ou humor. Importante não interromper abruptamente e manter acompanhamento médico regular.'
+    }
+};
+
+
 
         let prescriptions = [];
         let prescriptionCounter = 1;
