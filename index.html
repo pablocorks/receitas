@@ -11,11 +11,16 @@
             padding: 20px;
             background-color: #f4f4f4;
         }
+
+
+
+        
         .container {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
         }
         .medication-btn {
             display: inline-block;
@@ -72,7 +77,11 @@
             background-color: #dc3545;
             color: white;
         }
-/* Estilo para o antidepressivo ISRS */
+        .uso-title {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        /* Estilo para o antidepressivo ISRS */
 .button-ISRS {
     background-color: #4CAF50; /* Verde Claro */
 }
@@ -171,13 +180,13 @@
 .button-antihistaminico {
     background-color: #D35400; /* Laranja Escuro */
 }
+
     </style>
 </head>
 <body>
     <div class="container">
         <h3>Prescrições Dr. Pablo Xavier</h3>
-<button class="medication-btn button-ISRS" onclick="openModal('Oxalato de Escitalopram')">Oxalato de Escitalopram</button>
-<button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Sertralina')">Cloridrato de Sertralina</button>
+        <button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Sertralina')">Cloridrato de Sertralina</button>
 <button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Citalopram')">Cloridrato de Citalopram</button>
 <button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Paroxetina')">Cloridrato de Paroxetina</button>
 <button class="medication-btn button-ISRS" onclick="openModal('Cloridrato de Fluoxetina')">Cloridrato de Fluoxetina</button>
@@ -222,12 +231,216 @@
 <button class="medication-btn button-antipsicotico" onclick="openModal('Cloridrato de Agomelatina')">Cloridrato de Agomelatina</button>
 <button class="medication-btn button-antipsicotico" onclick="openModal('Cloridrato de Clorazepato')">Cloridrato de Clorazepato</button>
 <button class="medication-btn button-beta-bloqueador" onclick="openModal('Propranolol')">Propranolol</button>
-       
- <div id="prescription-output"></div>
+        
+        <div id="prescription-output"></div>
         <div class="action-buttons">
             <button id="copy-btn" onclick="copyPrescription()">Copiar Prescrição</button>
             <button id="clear-btn" onclick="clearPrescription()">Limpar Prescrição</button>
         </div>
+    </div>
+
+
+    
+    <div class="container">
+        <h3>Sistema de Geração de Textos</h3>
+        
+        <!-- Formulário de Inputs -->
+        <form id="texto-form">
+            <div class="input-group">
+                <label>Nome completo:</label>
+                <input type="text" id="nome_completo" required>
+            </div>
+            
+            <div class="input-group">
+                <label>Sexo:</label>
+                <label><input type="radio" name="sexo" value="o" required> Masculino</label>
+                <label><input type="radio" name="sexo" value="a" required> Feminino</label>
+            </div>
+            
+            <div class="input-group">
+                <label>Nome do acompanhante:</label>
+                <input type="text" id="nome_acompanhante">
+            </div>
+            
+            <div class="input-group">
+                <label>CID:</label>
+                <input type="text" id="cid_1">
+            </div>
+            
+            <div class="input-group">
+                <label>Dias de atestado:</label>
+                <input type="number" id="dias_1" min="1">
+            </div>
+            
+            <div class="input-group">
+                <label>Turno:</label>
+                <label><input type="radio" name="turno" value="manhã" required> Manhã</label>
+                <label><input type="radio" name="turno" value="tarde" required> Tarde</label>
+            </div>
+            
+            <button type="button" onclick="limparForm()" class="btn-secondary">Limpar Campos</button>
+        </form>
+    
+        <!-- Botões de Geração -->
+        <div class="buttons-container">
+            <button onclick="gerarTexto('atestado')" class="btn-primary">ATESTADO</button>
+            <button onclick="gerarTexto('atestado_acompanhante')" class="btn-primary">ATESTADO ACOMPANHANTE</button>
+            <button onclick="gerarTexto('declaracao_comparecimento')" class="btn-primary">DECLARAÇÃO DE COMPARECIMENTO</button>
+            <button onclick="gerarTexto('declaracao_comparecimento_acompanhante')" class="btn-primary">DECLARAÇÃO DE COMPARECIMENTO ACOMPANHANTE</button>
+            <button onclick="gerarTexto('exame_completo_homem')" class="btn-primary">PEDIDO DE EXAME COMPLETO HOMEM</button>
+            <button onclick="gerarTexto('exame_completo_mulher')" class="btn-primary">PEDIDO DE EXAME COMPLETO MULHER</button>
+            <button onclick="gerarTexto('pedido_exame')" class="btn-primary">PEDIDO DE EXAME</button>
+            <button onclick="gerarTexto('litemia')" class="btn-primary">LITEMIA</button>
+            <button onclick="gerarTexto('encaminhamento_psicoterapia')" class="btn-primary">ENCAMINHAMENTO PSICOTERAPIA</button>
+            <button onclick="gerarTexto('encaminhamento_laudo_neuro_tdah')" class="btn-primary">ENCAMINHAMENTO LAUDO NEUROPSICOLÓGICO TDAH</button>
+            <button onclick="gerarTexto('encaminhamento_laudo_neuro')" class="btn-primary">ENCAMINHAMENTO LAUDO NEUROPSICOLÓGICO</button>
+            <button onclick="gerarTexto('encaminhamento_neurologia')" class="btn-primary">ENCAMINHAMENTO PARA NEUROLOGIA / ESQUECIMENTO</button>
+            <button onclick="gerarTexto('higiene_sono')" class="btn-primary">HIGIENE DO SONO</button>
+            <button onclick="gerarTexto('anamnese_inicial_homem')" class="btn-primary">ANAMNESE INICIAL HOMEM</button>
+            <button onclick="gerarTexto('anamnese_inicial_mulher')" class="btn-primary">ANAMNESE INICIAL MULHER</button>
+            <button onclick="gerarTexto('anamnese_inicial_crianca')" class="btn-primary">ANAMNESE INICIAL CRIANÇA</button>
+            <button onclick="gerarTexto('anamnese_acompanhamento_homem')" class="btn-primary">ANAMNESE ACOMPANHAMENTO HOMEM</button>
+            <button onclick="gerarTexto('anamnese_acompanhamento_mulher')" class="btn-primary">ANAMNESE ACOMPANHAMENTO MULHER</button>
+            <button onclick="gerarTexto('anamnese_acompanhamento_crianca')" class="btn-primary">ANAMNESE ACOMPANHAMENTO CRIANÇA</button>
+        </div>
+    
+        <!-- Área do Texto Gerado -->
+        <div id="texto-output" class="output-container" style="display: none;">
+            <textarea id="texto-gerado" readonly></textarea>
+            <div class="output-buttons">
+                <button onclick="limparTexto()" class="btn-secondary">Limpar</button>
+                <button onclick="copiarTexto()" class="btn-primary">Copiar</button>
+            </div>
+        </div>
+    
+        <style>
+            .input-group {
+                margin-bottom: 15px;
+            }
+            .input-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+            .input-group input[type="text"],
+            .input-group input[type="number"] {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            .buttons-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 10px;
+                margin: 20px 0;
+            }
+            .btn-primary, .btn-secondary {
+                padding: 10px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+            }
+            .btn-primary {
+                background-color: #e49228;
+                color: white;
+            }
+            .btn-secondary {
+                background-color: #6c757d;
+                color: white;
+            }
+            .output-container {
+                margin-top: 20px;
+            }
+            #texto-gerado {
+                width: 100%;
+                min-height: 200px;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            .output-buttons {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+            }
+        </style>
+    
+        <script>
+            // Função para formatar a data atual
+            function getDataHoje() {
+                const data = new Date();
+                return data.toLocaleDateString('pt-BR');
+            }
+    
+            // Função para converter número em texto por extenso
+            function numeroPorExtenso(numero) {
+    const unidades = ['zero', 'um', 'dois', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove'];
+    const dezAteDezenove = ['dez', 'onze', 'doze', 'treze', 'quatorze', 'quinze', 'dezesseis', 'dezessete', 'dezoito', 'dezenove'];
+    const dezenas = ['vinte', 'trinta', 'quarenta', 'cinquenta', 'sessenta', 'setenta', 'oitenta', 'noventa'];
+    
+    if (numero < 0 || numero > 99) return numero.toString();
+    
+    if (numero < 10) return unidades[numero];
+    
+    if (numero >= 10 && numero < 20) {
+        return dezAteDezenove[numero - 10];
+    }
+    
+    if (numero >= 20) {
+        const dezena = Math.floor(numero / 10);
+        const unidade = numero % 10;
+        
+        if (unidade === 0) {
+            return dezenas[dezena - 2];
+        } else {
+            return dezenas[dezena - 2] + ' e ' + unidades[unidade];
+        }
+    }
+}
+    
+            // Função para gerar os textos
+            function gerarTexto(tipo) {
+                const nome = document.getElementById('nome_completo').value;
+                const sexo = document.querySelector('input[name="sexo"]:checked')?.value || '';
+                const acompanhante = document.getElementById('nome_acompanhante').value;
+                const cid = document.getElementById('cid_1').value;
+                const dias = document.getElementById('dias_1').value;
+                const turno = document.querySelector('input[name="turno"]:checked')?.value || '';
+                const data = getDataHoje();
+    
+                let texto = '';
+                
+                switch(tipo) {
+                    case 'atestado':
+                        texto = `ATESTADO MÉDICO\n\n`;
+                        texto += `Atesto que ${sexo} paciente supracitad${sexo}, necessita de um período de afastamento de suas atividades laborais de ${dias} (${numeroPorExtenso(parseInt(dias))}) dias, a partir de hoje, para manejo e tratamento de suas condições psicológicas.\n\n`;
+                        texto += `CID: ${cid}`;
+                        break;
+                    // Adicione outros casos conforme necessário
+                }
+    
+                document.getElementById('texto-output').style.display = 'block';
+                document.getElementById('texto-gerado').value = texto;
+            }
+    
+            function limparForm() {
+                document.getElementById('texto-form').reset();
+            }
+    
+            function limparTexto() {
+                document.getElementById('texto-gerado').value = '';
+                document.getElementById('texto-output').style.display = 'none';
+            }
+    
+            function copiarTexto() {
+                const texto = document.getElementById('texto-gerado');
+                texto.select();
+                document.execCommand('copy');
+                alert('Texto copiado para a área de transferência!');
+            }
+        </script>
     </div>
 
     <div id="medicationModal" class="modal">
@@ -237,9 +450,9 @@
                 <div>
                     <label>Forma de Uso:</label>
                     <div id="forma-uso-options">
-                        <label><input type="checkbox" value="USO ORAL"> USO ORAL</label><br>
-                        <label><input type="checkbox" value="USO IM"> USO IM</label><br>
-                        <label><input type="checkbox" value="USO INTRANASAL"> USO INTRANASAL</label><br>
+                        <label><input type="checkbox" value="USO ORAL" name="forma-uso"> USO ORAL</label><br>
+                        <label><input type="checkbox" value="USO IM" name="forma-uso"> USO IM</label><br>
+                        <label><input type="checkbox" value="USO INTRANASAL" name="forma-uso"> USO INTRANASAL</label><br>
                     </div>
                 </div>
                 <div>
@@ -272,19 +485,19 @@
                 doses: ['10mg', '15mg', '20mg'],
                 brands: 'Reconter®, Fusor®, Esc® ou Eudok®',
                 instructions: [
-                    'Tomar meio comprimido por 10 dias, depois 1 por dia.',
+                    'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
                     'Tomar 1 comprimido por dia pela manhã.',
                     'Tomar 1 comprimido por dia antes de dormir.'
                 ],
-                orientations: 'Efeitos colaterais podem incluir náuseas e tontura. Consulte seu médico.'
-            },
-        'Cloridrato de Sertralina': {
+                orientations: '​Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
+				},
+    'Cloridrato de Sertralina': {
         doses: ['25mg', '50mg', '100mg'],
         brands: 'Zoloft®, Assert®, Serenata®, Tolrest® ou Afetus®',
         instructions: [
-            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-            'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
+        'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+                    'Tomar 1 comprimido por dia pela manhã.',
+                    'Tomar 1 comprimido por dia antes de dormir.'
         ],
         orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
     },
@@ -295,16 +508,16 @@
             'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
         ]
     },
-    'Cloridrato de Venlafaxina': {
-        doses: ['37,5mg', '75mg', '150mg'],
-        brands: 'Efexor®, Vinfa®, Venlex®',
-        instructions: [
-            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-            'Tomar 1 comprimido por dia Antes de dormir, no mesmo horário.'
-        ],
-        orientations: 'Durante as primeiras semanas de uso da medicação, é comum que você experimente alguns efeitos colaterais, como dor de cabeça, desconforto estomacal, tontura, tremores, insônia ou sonolência, náuseas, boca seca e diarreia. Além disso, pode haver um aumento temporário do nervosismo e da ansiedade. É importante lembrar que esses efeitos são geralmente transitórios e tendem a diminuir com o tempo. Por favor, não interrompa o uso do medicamento sem orientação médica, pois a continuidade do tratamento é fundamental para o seu progresso.'
-    },
+'Cloridrato de Venlafaxina': {
+    doses: ['37,5mg', '75mg', '150mg'],  
+    brands: 'Venlift OD®, Efexor XR®, Alenthus XR®, Venforin®, Veniz XR®, Vensate LP®, Myletin®, Venlaxin XR®',
+    instructions: [
+        'Tomar 1 cápsula por dia junto com alimentos. Preferencialmente pela manhã, no mesmo horário.',
+        'Para transtorno do pânico, iniciar com 37,5mg por dia durante os primeiros 7 dias e, em seguida, aumentar para 75mg por dia, conforme orientação médica.',
+        'Não partir ou triturar o medicamento. Administrar inteiro com um copo de água.'
+    ],
+    orientations: 'Durante as primeiras semanas de tratamento, podem ocorrer efeitos colaterais como dor de cabeça, náuseas, tontura, insônia ou sonolência, boca seca e nervosismo.',
+  },
     'Ácido Valproico': {
         doses: ['200mg', '300mg', '500mg'],
         brands: 'Depakene®, Valpakene®, Ácido Val®, Valproato®',
@@ -407,8 +620,9 @@
         doses: ['10mg', '20mg', '40mg'],
         brands: 'Cipramil®, Cital®, Citam®',
         instructions: [
-            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+                    'Tomar 1 comprimido por dia pela manhã.',
+                    'Tomar 1 comprimido por dia antes de dormir.'
         ],
         orientations: 'Durante as primeiras semanas, podem ocorrer efeitos como náuseas, sonolência, insônia ou alterações no sono. É importante manter o tratamento constante e comunicar ao médico qualquer efeito colateral significativo.'
     },
@@ -470,8 +684,9 @@
         doses: ['10mg', '20mg', '40mg'],
         brands: 'Prozac®, Fluctin®, Fluoxetina®',
         instructions: [
-            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+                    'Tomar 1 comprimido por dia pela manhã.',
+                    'Tomar 1 comprimido por dia antes de dormir.'
         ],
         orientations: 'Pode causar inquietação inicial, nervosismo, insônia ou sonolência. Os efeitos terapêuticos geralmente começam após algumas semanas de uso. Importante manter regularidade no tratamento.'
     },
@@ -524,7 +739,7 @@
         doses: ['25mg', '50mg', '100mg', '200mg'],
         brands: 'Lamictal®, Lamitor®, Lamilept®',
         instructions: [
-            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+            'O início deve ser gradual, respeite as indicações a seguir: Tomar 1 comprimido pela manhã em dias alternados, por 2 semanas. A partir da 3ª semana, tomar 1 comprimido por dia pela manhã, por mais 2 semanas. A partir da 5ª semana, a dose deve ser aumentada para 1 comprimido a cada 12 horas. ',
             'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
         ],
         orientations: 'Pode causar tontura, sonolência, dor de cabeça. Requer acompanhamento médico rigoroso. Importante iniciar com dose baixa e aumentar gradualmente para minimizar risco de erupção cutânea.'
@@ -565,16 +780,7 @@
         ],
         orientations: 'Medicamento controlado para uso em procedimentos médicos ou tratamento de curto prazo. Pode causar sonolência profunda, tontura, dependência. Usar exclusivamente sob supervisão médica.'
     },
-    'Cloridrato de Mirtazapina': {
-        doses: ['15mg', '30mg', '45mg'],
-        brands: 'Remeron®, Mirtaz®, Neuropax®',
-        instructions: [
-            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
-            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
-        ],
-        orientations: 'Pode causar sonolência significativa, ganho de peso, aumento de apetite. Alguns pacientes podem experimentar boca seca ou tontura. Importante manter acompanhamento médico regular.'
-    },
-    'Cloridrato de Nortriptilina': {
+       'Cloridrato de Nortriptilina': {
         doses: ['10mg', '25mg', '75mg'],
         brands: 'Pamelor®, Nortrip®, Nortilina®',
         instructions: [
@@ -603,10 +809,11 @@
     },
     'Cloridrato de Paroxetina': {
         doses: ['10mg', '20mg', '40mg'],
-        brands: 'Pondera®, Paroxetina®, Aropax®',
+        brands: 'Pondera®, Paxtrat®',
         instructions: [
-            'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
-            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
+        'Durante os 10 primeiros dias, tomar meio comprimido. A partir do 11º dia, iniciar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.',
+                    'Tomar 1 comprimido por dia pela manhã.',
+                    'Tomar 1 comprimido por dia antes de dormir.'
         ],
         orientations: 'Pode causar náuseas, sonolência, insônia, alterações no sono. Os efeitos terapêuticos geralmente começam após algumas semanas de uso. Importante manter regularidade no tratamento.'
     },
@@ -691,15 +898,17 @@
         ],
         orientations: 'Pode causar perda de apetite, insônia, inquietação. Em crianças, é importante monitorar crescimento e desenvolvimento. Não interromper abruptamente sem orientação médica.'
     },
-    'Mirtazapina': {
-        doses: ['15mg', '30mg', '45mg'],
-        brands: 'Remeron®, Mirtaz®, Neuropax®',
-        instructions: [
-            'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
-            'Tomar 1 comprimido por dia. Sempre pela manhã, após se alimentar, no mesmo horário.'
-        ],
-        orientations: 'Pode causar sonolência significativa, ganho de peso, aumento de apetite. Alguns pacientes podem experimentar boca seca ou tontura. Importante manter acompanhamento médico regular.'
-    },
+'Mirtazapina': {
+    doses: ['15mg', '30mg', '45mg'],
+    brands: 'Remeron soltab®, Menelat ODT®, Zapsy®, Rapazina ODT®, Menelat®, Razapina®',
+    instructions: [
+        'Tomar 1 comprimido por dia. Preferencialmente antes de dormir, no mesmo horário.',
+        'Para comprimidos orodispersíveis: dissolver na boca antes de engolir. Tomar 1 vez ao dia, no mesmo horário.',
+        'Não partir ou triturar comprimidos revestidos. Tomar por via oral com água, seguindo a orientação médica.'
+    ],
+    orientations: 'Pode causar sonolência significativa, ganho de peso e aumento do apetite. Recomenda-se cautela em pacientes com histórico de depressão medular, icterícia ou problemas cardíacos. O acompanhamento médico regular é essencial. Não indicado para crianças e deve-se evitar a amamentação, salvo orientação médica. Diluir comprimidos orodispersíveis em água para uso por sonda nasogástrica.'
+},
+
      'Prazosina': {
         doses: ['1mg', '2mg', '5mg'],
         brands: 'Minipress®, Prazol®, Hipotensor®',
@@ -727,7 +936,7 @@
         ],
         orientations: 'Pode causar tontura, fadiga, bradicardia. Alguns pacientes podem experimentar alterações no sono ou humor. Importante não interromper abruptamente e manter acompanhamento médico regular.'
     }
-};
+        };
         let prescriptions = [];
 
         function openModal(medication) {
@@ -751,6 +960,7 @@
 
         function closeModal() {
             document.getElementById('medicationModal').style.display = 'none';
+            document.getElementById('medication-form').reset();
         }
 
         document.getElementById('medication-form').onsubmit = function(e) {
@@ -758,17 +968,25 @@
 
             const medication = document.getElementById('modal-title').textContent;
             const doses = Array.from(document.querySelectorAll('#dose-options input:checked')).map(cb => cb.value);
-            const instructions = Array.from(document.querySelectorAll('#instruction-options input:checked')).map(cb => medications[medication].instructions[cb.value]);
+            const instructions = Array.from(document.querySelectorAll('#instruction-options input:checked'))
+                .map(cb => medications[medication].instructions[parseInt(cb.value)]);
             const quantidade = document.getElementById('quantidade').value;
             const includeOrientation = document.getElementById('enable-orientation').checked;
+            const formaUso = document.querySelector('input[name="forma-uso"]:checked');
+
+            if (!formaUso) {
+                alert('Por favor, selecione uma forma de uso.');
+                return;
+            }
 
             const newPrescription = {
                 medication: medication,
-                doses: doses.join(', '),
+                dose: doses.join(', '),
                 quantidade: quantidade,
-                instructions: instructions.join('\n'),
-                orientation: includeOrientation ? medications[medication].orientations : '',
-                brands: medications[medication].brands
+                instrucao: instructions.join('\n'),
+                orientacoes: includeOrientation ? medications[medication].orientations : '',
+                brands: medications[medication].brands,
+                formaUso: formaUso.value
             };
 
             prescriptions.push(newPrescription);
@@ -776,25 +994,36 @@
             closeModal();
         };
 
-       function renderPrescription() {
-    const output = document.getElementById('prescription-output');
-    let prescriptionText = '';
+        function renderPrescription() {
+            const output = document.getElementById('prescription-output');
+            let prescriptionText = '';
 
-    prescriptionCounter = 1;
-    prescriptions.forEach(p => {
-        prescriptionText += `${prescriptionCounter} - ${p.medication} ${p.dose} ________ ${p.quantidade} cp\n`;
-        prescriptionText += `(${p.brands})\n`;
-        prescriptionText += ` - ${p.instrucao}\n`;
-        if (p.orientacoes) {
-            prescriptionText += ` - ${p.orientacoes}\n`;
+            // Agrupar prescrições por forma de uso
+            const groupedPrescriptions = prescriptions.reduce((acc, prescription) => {
+                if (!acc[prescription.formaUso]) {
+                    acc[prescription.formaUso] = [];
+                }
+                acc[prescription.formaUso].push(prescription);
+                return acc;
+            }, {});
+
+            // Renderizar cada grupo
+            Object.entries(groupedPrescriptions).forEach(([formaUso, prescriptions]) => {
+                prescriptionText += `\n# ${formaUso}\n\n`;
+                
+                prescriptions.forEach((p, index) => {
+                    prescriptionText += `${index + 1} - ${p.medication} ${p.dose} ________ ${p.quantidade} cp\n`;
+                    prescriptionText += `(${p.brands})\n`;
+                    prescriptionText += ` - ${p.instrucao}\n`;
+                    if (p.orientacoes) {
+                        prescriptionText += ` - ${p.orientacoes}\n`;
+                    }
+                    prescriptionText += '\n';
+                });
+            });
+
+            output.innerHTML = prescriptionText.replace(/\n/g, '<br>');
         }
-        prescriptionText += '\n';
-        prescriptionCounter++;
-    });
-
-    output.innerHTML = prescriptionText.replace(/\n/g, '<br>');
-}
-
 
         function clearPrescription() {
             prescriptions = [];
@@ -804,7 +1033,6 @@
         function copyPrescription() {
             const output = document.getElementById('prescription-output').innerText;
             navigator.clipboard.writeText(output).then(() => {
-                alert('Prescrição copiada para a área de transferência!');
             });
         }
     </script>
