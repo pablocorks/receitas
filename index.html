@@ -418,7 +418,35 @@
                         texto += `Atesto que ${sexo} paciente supracitad${sexo}, necessita de um período de afastamento de suas atividades laborais de ${dias} (${numeroPorExtenso(parseInt(dias))}) dias, a partir de hoje, para manejo e tratamento de suas condições psicológicas.\n\n`;
                         texto += `CID: ${cid}`;
                         break;
-                    // Adicione outros casos conforme necessário
+                        case 'encaminhamento_psicoterapia':
+    texto = `ENCAMINHAMENTO PARA PSICOTERAPIA\n\n`;
+    texto += `Encaminho ${sexo} paciente supracitad${sexo} para avaliação e acompanhamento psicológico com o objetivo de manejo terapêutico dos sintomas e desenvolvimento de estratégias para melhorar sua qualidade de vida.\n\n`;
+    texto += `CID: ${cid}\n\n`;
+    texto += `Muito obrigado.\n\n`;
+    texto += `Dr. Pablo Xavier\nCRM 98284\n${data}`;
+    break;
+    
+    case 'pedido_exame':
+    texto = `SOLICITO OS SEGUINTES EXAMES:\n\n`;
+    texto += `- ÁCIDO FÓLICO\n`;
+    texto += `- CORTISOL\n`;
+    texto += `- FERRO SÉRICO\n`;
+    texto += `- FERRITINA\n`;
+    texto += `- HEMOGRAMA COMPLETO\n`;
+    texto += `- MAGNÉSIO\n`;
+    texto += `- ZINCO\n`;
+    texto += `- SELÊNIO\n`;
+    texto += `- POTÁSSIO\n`;
+    texto += `- T4 LIVRE\n`;
+    texto += `- TSH\n`;
+    texto += `- HOMOCISTEÍNA\n`;
+    texto += `- VITAMINA B12\n`;
+    texto += `- VITAMINA D 25 HIDROXI\n\n`;
+    texto += `JUSTIFICATIVA: INVESTIGAÇÃO CLÍNICA\n`;
+    texto += `CID: Z004\n\n`;
+    texto += `DATA: ${data}`;
+    break;
+
                 }
     
                 document.getElementById('texto-output').style.display = 'block';
@@ -442,6 +470,8 @@
             }
         </script>
     </div>
+
+
 
     <div id="medicationModal" class="modal">
         <div class="modal-content">
